@@ -225,7 +225,7 @@ indigov-take-home/
   - Not tracked in git (regenerated on build)
 
 
-##Potential Future Improvements
+### Potential Future Improvements
 
 1. Add a proper database (PostgreSQL)
 2. Implement user roles and permissions
