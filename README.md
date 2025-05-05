@@ -27,8 +27,8 @@ A full-stack application for managing constituents, built as a take-home project
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd indigov-take-home
+git clone https://github.com/jessicatitus/constituent-management-system.git
+cd constituent-management-system
 ```
 
 2. Install dependencies:
@@ -76,7 +76,7 @@ curl -X POST http://localhost:3001/auth/register \
 
 ## Data Storage
 
-The application currently uses in-memory storage for both users and constituents. This was chosen for simplicity and to avoid setting up a database for the take-home project. In a production environment, this would be replaced with a proper database (e.g., PostgreSQL).
+The application currently uses in-memory storage for both users and constituents. This was chosen for simplicity and to avoid setting up a database for the take-home project. The in-memory data store is implemented through a Map data structure in src/storage/database.ts, with data persistence achieved by writing to a JSON file (data/constituents.json). While this approach is simple and doesn't require a database setup, it means the data is lost when the server restarts and isn't suitable for production use. In a production environment, this would be replaced with a proper database (e.g., PostgreSQL).
 
 ### Tradeoffs Made
 1. **In-memory Storage**
