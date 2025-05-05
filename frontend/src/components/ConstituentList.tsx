@@ -3,12 +3,13 @@ import { Constituent } from '../types/constituent';
 
 interface ConstituentListProps {
   constituents: Constituent[];
+  token: string;
 }
 
 type SortField = 'name' | 'email' | 'location';
 type SortDirection = 'asc' | 'desc';
 
-const ConstituentList: React.FC<ConstituentListProps> = ({ constituents }) => {
+const ConstituentList: React.FC<ConstituentListProps> = ({ constituents, token }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortField, setSortField] = useState<SortField>('name');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
@@ -59,22 +60,29 @@ const ConstituentList: React.FC<ConstituentListProps> = ({ constituents }) => {
 
   const handleExport = async () => {
     try {
-      const queryParams = new URLSearchParams();
-      if (startDate) queryParams.append('from', startDate);
-      if (endDate) queryParams.append('to', endDate);
+      const params = new URLSearchParams();
+      if (startDate) params.append('from', startDate);
+      if (endDate) params.append('to', endDate);
       
-      const response = await fetch(`http://localhost:3001/constituents/export?${queryParams.toString()}`);
-      if (response.ok) {
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'constituents.csv';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
+      const response = await fetch(`http://localhost:3001/constituents/export?${params}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error('Export failed');
       }
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'constituents.csv';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
     } catch (error) {
       console.error('Error exporting constituents:', error);
     }

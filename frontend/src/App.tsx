@@ -61,11 +61,11 @@ const App: React.FC = () => {
       const updatedConstituent = await response.json();
       
       setConstituents(prev => {
-        const index = prev.findIndex(c => c.email === updatedConstituent.email);
-        if (index !== -1) {
-          const newConstituents = [...prev];
-          newConstituents[index] = updatedConstituent;
-          return newConstituents;
+        const existingConstituent = prev.find(c => c.email === updatedConstituent.email);
+        if (existingConstituent) {
+          // Preserve the original ID when updating
+          const updatedWithOriginalId = { ...updatedConstituent, id: existingConstituent.id };
+          return prev.map(c => c.id === existingConstituent.id ? updatedWithOriginalId : c);
         } else {
           return [...prev, updatedConstituent];
         }
@@ -127,7 +127,7 @@ const App: React.FC = () => {
         {/* Constituents List Section */}
         <section>
           <div className="bg-white rounded-lg shadow-md p-8">
-            <ConstituentList constituents={constituents} />
+            <ConstituentList constituents={constituents} token={token!} />
           </div>
         </section>
       </div>
