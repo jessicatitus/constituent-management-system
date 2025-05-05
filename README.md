@@ -67,8 +67,8 @@ You can use the following credentials to log in:
 - Email: admin@indigov.com
 - Password: grit
 
-- By running this:
-- ```bash
+By running this:
+```bash
   curl -X POST http://localhost:3001/auth/register \
     -H "Content-Type: application/json" \
     -d '{"email": "admin@indigov.com", "password": "grit", "firstName": "Admin", "lastName": "User"}'
