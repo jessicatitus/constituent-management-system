@@ -64,8 +64,15 @@ npm run seed
 ## Login Credentials
 
 You can use the following credentials to log in:
-- Email: jessica@indigov.com
+- Email: admin@indigov.com
 - Password: grit
+
+- By running this:
+- ```bash
+  curl -X POST http://localhost:3001/auth/register \
+    -H "Content-Type: application/json" \
+    -d '{"email": "admin@indigov.com", "password": "grit", "firstName": "Admin", "lastName": "User"}'
+  ```
 
 Or register a new account through the registration endpoint:
 ```bash
