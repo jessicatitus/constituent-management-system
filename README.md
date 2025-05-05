@@ -230,4 +230,5 @@ indigov-take-home/
 1. Add a proper database (PostgreSQL)
 2. Implement user roles and permissions
 3. Add tests
+4. Refactor to utilize helper files (ex: states definition, zipcode validator, etc.)
 
