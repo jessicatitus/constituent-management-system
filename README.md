@@ -61,7 +61,7 @@ The application comes with a seed script to populate initial data:
 npm run seed
 ```
 
-## Login Credentials
+## Login Credentials (see below explanation in Data Storage section for details)
 
 You can use the following credentials to log in:
 - Email: admin@indigov.com
@@ -74,7 +74,7 @@ By running this:
     -d '{"email": "admin@indigov.com", "password": "grit", "firstName": "Admin", "lastName": "User"}'
   ```
 
-Or register a new account through the registration endpoint:
+Or register a new account of your choosing through the registration endpoint:
 ```bash
 curl -X POST http://localhost:3001/auth/register \
   -H "Content-Type: application/json" \
